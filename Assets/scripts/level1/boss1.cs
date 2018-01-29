@@ -42,6 +42,8 @@ public class boss1 : MonoBehaviour {
 	public GameObject queue;
 	public GameObject smokePart;
 
+    public GameObject[] ColliderBossState;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -52,7 +54,6 @@ public class boss1 : MonoBehaviour {
 		CanAttack = true;
 		audiosource.PlayOneShot (monster1, 0.5f);
 		InitialPV = PV;
-
 	}
 	
 	// Update is called once per frame
@@ -227,9 +228,9 @@ public class boss1 : MonoBehaviour {
 
 		}
 	}
+
 	IEnumerator WaitToEndAttack()
 	{
-
 		Rigidbody2D clone;
 		if (Attaque == 1) {
 			
@@ -264,12 +265,8 @@ public class boss1 : MonoBehaviour {
 				clone.velocity = transform.TransformDirection (Vector2.up * 6);
 				yield return new WaitForSeconds (0.5f);
 			}
-
 		}
-	
 		State = 1;
-			
-	
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
@@ -281,4 +278,19 @@ public class boss1 : MonoBehaviour {
 	public void Blesser(int degats){
 		PV-=degats;
 	}
+
+    void ResetCollider (int State)
+    {
+        for (int i = 0; i < ColliderBossState.Length; i++)
+        {
+            if (i != State)
+            {
+                ColliderBossState[i].GetComponent<PolygonCollider2D>().enabled = false;
+            } else
+            {
+                ColliderBossState[i].GetComponent<PolygonCollider2D>().enabled = true;
+            }
+        }
+    }
+
 }
