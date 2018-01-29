@@ -47,6 +47,9 @@ public class amo : MonoBehaviour {
 				}else if(col.gameObject.GetComponent<boss1> () != null){
 					col.gameObject.GetComponent<boss1> ().Blesser (1);
 
+				}else if(col.gameObject.GetComponent<FlyEnnemi1> () != null){
+					col.gameObject.GetComponent<FlyEnnemi1> ().Blesser (1);
+
 				}
 				Destroy (this.gameObject);
 
